@@ -1,0 +1,64 @@
+<style>
+.btn-secondary {
+    display: inherit;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+.warnings {
+    margin: 0 auto;
+    max-width: 460px;
+    margin-bottom: 25px;
+}
+
+.alert {
+    margin-top: 20px;
+    margin: 0 auto;
+    max-width: 350px;
+    margin-top: 25px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.info li {
+    padding: 4px;
+}
+
+.ng-touched.ng-valid {
+    border: 2px green solid;
+}
+
+.ng-touched.ng-invalid {
+    border: 2px red solid;
+}
+
+.my-info {
+    min-height: 372px;
+    width: 610px;
+}
+</style>
+<div class="container my-info">
+    <div ng-if="myInfo.user">
+        <h2 id="menu-categories-title" class="text-center">My Information</h2>
+        <ul class="info">
+            <li><strong>Name: </strong> {{myInfo.user.firstName}} {{myInfo.user.lastName}}</li>
+            <li><strong>Email: </strong> {{myInfo.user.email}}</li>
+            <li ng-if="myInfo.user.phone"><strong>Phone: </strong> +1-{{myInfo.user.phone}}</li>
+            <li><strong>Favorite Menu Item: </strong>
+                <ul>
+                    <li><strong>{{myInfo.user.selectedFavorite.short_name}} - {{myInfo.user.selectedFavorite.name}}</strong></li>
+                    <li ng-if="myInfo.user.selectedFavorite.description">{{myInfo.user.selectedFavorite.description | capitalize}}</li>
+                    <li>
+                        <img class="item-image img-thumbnail" ng-src="https://jlar-server.herokuapp.com/images/{{myInfo.user.selectedFavorite.short_name}}.jpg">
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <button type="button" class="btn btn-secondary" ng-click="myInfo.logOut()">Log Out</button>
+    </div>
+    <div class="alert alert-info" role="alert" ng-if="!myInfo.user">
+        <strong>Heads up!</strong> Not Signed Up Yet. <a ui-sref="signUp">Sign up Now!</a>
+    </div>
+</div>
